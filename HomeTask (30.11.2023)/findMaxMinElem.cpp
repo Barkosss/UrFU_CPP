@@ -8,48 +8,56 @@ using std::min;
 
 int main() {
 
-    int collumns, rows;
-    cout << "Enter counter collumns: "; cin >> collumns;
-    if (collumns < 1) { cout << "" << endl; return 0; }
-    cout << "Enter counter rows: "; cin >> rows;
-    if (rows < 1 || collumns < 1) { cout << "The counter rows and collumns must be greater than 0" << endl; return 0; }
 
-    cout << "Create matrix:" << endl;
-    int **matrix = new int*[rows];
-    for(int i = 0; i < rows; i++) {
-        matrix[i] = new int[collumns];
-        cout << i + 1 << ". Row: ";
-        for(int j = 0; j < collumns; j++) {
-            cin >> matrix[i][j];
+    int rows, collumns; // rows - строки, collumns - столбцы
+    cout << "Enter counter collumns: "; cin >> collumns; // Пользователь указывает количество стобцов
+    cout << "Enter counter rows: "; cin >> rows; // Пользователь указывает количество строк
+    if (rows < 1 || collumns < 1) { cout << "The counter rows and collumns must be greater than 0." << endl; return 0; };
+
+    cout << "Create Matrix" << endl;
+    // Создаём массив с кол-вом колонок равное collumns
+    int **matrix = new int*[collumns];
+    // Создаём ещё один массив в столбце (collumn)
+    for(int collumn = 0; collumn < collumns; collumn++) matrix[collumn] = new int[rows];
+    for(int row = 0; row < rows; row++) { // Запись значений в массива
+        cout << row + 1 << ". Row: ";
+        for(int collumn = 0; collumn < collumns; collumn++) {
+            cin >> matrix[collumn][row];
         }
     }
     cout << endl;
 
-    cout << "View matrix" << endl;
-    for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < collumns; j++) {
-            cout << matrix[i][j] << " ";
+    cout << "Vew Matrix" << endl;
+    for(int row = 0; row < rows; row++) {
+        for(int collumn = 0; collumn < collumns; collumn++) {
+            cout << matrix[collumn][row] << " ";
         }
         cout << endl;
     }
     cout << endl;
 
+
     int maxNumberRow, minNumberCollumn; 
     cout << "Answer:" << endl; int number; int count = 0;
-    for(int indexRow = 0; indexRow < rows; indexRow++) {
-        for(int indexCollumn = 0; indexCollumn < collumns; indexCollumn++) {
-            // ПРОБЛЕМА
-            minNumberCollumn = 10'000'000; maxNumberRow = -10'000'000;
-            number = matrix[indexRow][indexCollumn];
+    
+    for(int collumn = 0; collumn < collumns; collumn++) {
+        for(int row = 0; row < rows; row++) {
+            maxNumberRow = -1 * INT_MAX - 1; minNumberCollumn = INT_MAX;
+            number = matrix[collumn][row];
 
-            for(int row = 0; row < rows; row++) maxNumberRow = max(number, matrix[row][indexCollumn]);
-            for(int collumn = 0; collumn < collumns; collumn++) minNumberCollumn = min(number, matrix[indexRow][collumn]);
+            // Минимальное число в столбце
+            for(int rowInCollumn = 0; rowInCollumn < rows; rowInCollumn++) 
+                minNumberCollumn = min(minNumberCollumn, min(number, matrix[collumn][rowInCollumn]));
+
+            // Максимальное число в строке
+            for(int collumnInRow = 0; collumnInRow < collumns; collumnInRow++)
+                maxNumberRow = max(maxNumberRow, max(number, matrix[collumnInRow][row]));
+
 
             if (number == maxNumberRow && number == minNumberCollumn) {
-                cout << count + 1 << ". Row: " << indexRow << ", Collumn: " << indexCollumn << endl;
+                cout << count + 1 << ". Row: " << row << ", Collumn: " << collumn << endl;
                 count++;
             }
-            // ПРОБЛЕМА
         }
     }
 
