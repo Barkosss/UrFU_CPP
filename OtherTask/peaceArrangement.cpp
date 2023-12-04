@@ -10,13 +10,12 @@ using std::min;
 1 - Место занято ферзём
 */
 
-int countSolution = 0;
 bool newRowQueen = false;
 int count = 1;
 
 
 // Вывод расстановки
-void static PrintSolution(int* queens, int** field, int number) {
+void static PrintSolution(int** field, int number) {
 
 	for (int i = 0; i < number; i++) {
 		for (int j = 0; j < number; j++) {
@@ -25,9 +24,9 @@ void static PrintSolution(int* queens, int** field, int number) {
 		}
 		cout << endl;
 	}
-	cout << endl;
-	for (int i = 0; i < number; i++) cout << '=';
-	cout << endl;
+	cout << endl << endl;
+	for (int i = 0; i < number; i++) cout << "-----------------";
+	cout << endl << endl;
 	return;
 }
 
@@ -59,8 +58,12 @@ bool static CheckSetQueen(int** field, int x, int y, int number) {
 	return true;
 }
 
+
 // Функция для установки ферзя (X - столбец, Y - строка)
 void static SetQueens(int* queens, int** field, int number, int x, int y) {
+
+	// Расстановки кончились
+	if (x < 0) return;
 
 	// Если выходим за пределы по Y
 	if (y + 1 > number) {
@@ -71,22 +74,17 @@ void static SetQueens(int* queens, int** field, int number, int x, int y) {
 
 		// Если было обнуление
 		int oldQueenY = queens[x - 1];
-		queens[x - 1] = -1;
+		queens[x - 1] = -1;	
 		newRowQueen = false;
 		return SetQueens(queens, field, number, x - 1, y + 1);
 	}
 
-	// Если количество решение больше или равно чем number
-	if (countSolution == number) {
-		cout << "Exit" << endl;
-		return;
-	}
-
-	else if (count == number) {
-		PrintSolution(queens, field, number);
-		countSolution++;
+	if (count == number) {
+		PrintSolution(field, number);
 		field[x][y] = 0; // Убираем текущего ферзя
 		queens[x] = -1;
+		newRowQueen = true;
+		count--;
 		return SetQueens(queens, field, number, x, y + 1);
 	}
 
@@ -96,7 +94,7 @@ void static SetQueens(int* queens, int** field, int number, int x, int y) {
 			field[x][row] = 1; // Ставим ферзя на место
 			queens[x] = row;
 			count++;
-			return SetQueens(queens, field, number, x + 1, y + 2);
+			return SetQueens(queens, field, number, x + 1, row + 2);
 		}
 	}
 
@@ -108,6 +106,7 @@ void static SetQueens(int* queens, int** field, int number, int x, int y) {
 }
 
 int main() {
+	cout.tie(nullptr);
 
 	int number;
 	cout << "Enter number: "; cin >> number;
@@ -115,10 +114,10 @@ int main() {
 		cout << "Number < 4" << endl;
 		return 0;
 	}
+	cout << endl;
 	int* queens = new int[number] { -1 }; // Координаты установленных ферзей (По умолчанию -1)
 	int** field = new int* [number]; // Поле NxN
 	for (int i = 0; i < number; i++) field[i] = new int[number] { 0 }; // Создание массива в массиве
 	SetQueens(queens, field, number, 0, 0); // Вызов функции
-	cout << "Return 0;" << endl;
 	return 0;
 }
