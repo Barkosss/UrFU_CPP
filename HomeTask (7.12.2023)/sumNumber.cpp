@@ -4,8 +4,9 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-int count = 0;
-int SumDigits(int number) {
+int SumDigits(long long number, long sum = 0) {
+    if (!number) return sum;
+    return SumDigits(number / 10, sum + (number % 10));
 }
 
 /* ЗАДАНИЕ 1
@@ -16,6 +17,6 @@ int SumDigits(int number) {
 int main() {
     long long number;
     cout << "Number: "; cin >> number;
-    cout << SumDigits(number);
+    cout << "Answer: " << SumDigits(number);
     return 0;
 }
