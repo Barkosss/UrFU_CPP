@@ -5,20 +5,17 @@ using std::cout;
 using std::endl;
 
 int count = 0;
-int SumNumber(int numberFrom, int numberTo) {
-    if (count == numberTo) return 0; count++;
-    return numberFrom + SumNumber(numberFrom + 1, numberTo);
+int SumDigits(int number) {
 }
 
 /* ЗАДАНИЕ 1
-* Написать рекурсивную функцию, вычисляющую умму цифр десятичной записи
+* Написать рекурсивную функцию, вычисляющую сумму цифр десятичной записи
 * неотрицательного целого числа
 */
 
 int main() {
-    int number;
+    long long number;
     cout << "Number: "; cin >> number;
-    if (number < 0) { cout << "The number must be non-negative" << endl; return 0; };
-    cout << SumNumber(1, number);
+    cout << SumDigits(number);
     return 0;
 }
