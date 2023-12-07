@@ -13,10 +13,11 @@ char ArrayBase[6] { 'A', 'B', 'C', 'D', 'E', 'F' };
 // base - основание системы счисления
 int remain; // Остаток числа
 int Convert(int number, int base) {
-    if (number <= 0) return 0;
+    if (number == 0) return 1;
     remain = number % base;
-    if (remain < 10) ArrayNumber[i] = remain;
-    else ArrayNumber[i] = ArrayBase[10 - remain];
+    cout << endl << remain;
+    if (remain > 9) ArrayNumber[i] = ArrayBase[remain - 10];
+    else ArrayNumber[i] = remain;
     i++;
     return Convert(number / base, base);
 }
