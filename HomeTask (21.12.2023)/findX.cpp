@@ -35,8 +35,6 @@ int main() {
     int *Array = new int[countNumbers];
     for(int i = 0; i < countNumbers; i++) cin >> Array[i];
 
-    // 4 54 54 54 54 231 231 321 545 564
-
     // Проврека на корректный массив
     for(int i = 1; i < countNumbers; i++) {
         if (Array[i - 1] > Array[i]) {
