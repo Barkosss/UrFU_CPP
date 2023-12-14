@@ -21,6 +21,7 @@ int main() {
             matrix[i][j] = flag;
             flag = abs(flag - 1);
         }
+        if (number % 2 == 0) flag = abs(flag - 1);
     }
 
     cout << "View matrix" << endl;
