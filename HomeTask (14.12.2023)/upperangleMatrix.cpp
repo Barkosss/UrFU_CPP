@@ -11,12 +11,13 @@ using std::getline;
 // Задание #3
 
 int main() {
+    int maxN = 0;
     int n; bool flag = true;
     std::ifstream readFile("upperangleMatrix.txt");
     if (readFile.is_open()) { // Если получилось открыть файл
         while(!readFile.eof()) {
             readFile >> n;
-            int **matrix = new int*[n]{ 0 };
+            int **matrix = new int*[n];
 
             // Запись матрицы
             for(int i = 0; i < n; i++) {
@@ -46,7 +47,7 @@ int main() {
                 if (!flag) break;
             }
 
-            if (flag) {
+            if (flag && maxN < n) {
                 std::ofstream writeFile;
                 writeFile.open("upperangleMatrixInfo.txt");
                 if (writeFile.is_open()) { // Если получилось открыть файл
@@ -61,6 +62,7 @@ int main() {
                     cout << "File opening error" << endl;
                     return 0;
                 }
+                maxN = n;
                 writeFile.close();
             }
             flag = true;
@@ -74,6 +76,8 @@ int main() {
         cout << "File opening error" << endl;
         return 0;
     }
+
+    if (!maxN) cout << "Upper-angular matrix not found" << endl;
     
     readFile.close();
     return 0;
