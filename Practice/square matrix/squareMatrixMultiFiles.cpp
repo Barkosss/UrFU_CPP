@@ -25,7 +25,7 @@ int main() {
         return 2;
     }
 
-    long counterMatrix;
+    int counterMatrix;
     readFile >> counterMatrix;
 
     for(int indexMatrix = 0; indexMatrix < counterMatrix; indexMatrix++) {
@@ -34,6 +34,8 @@ int main() {
     }
 
     cout << "Complete!" << endl;
+    readFile.close();
+    writeFile.close();
 
     return 0;
 }

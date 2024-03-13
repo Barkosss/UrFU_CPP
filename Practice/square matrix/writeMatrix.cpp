@@ -9,7 +9,7 @@ using std::ofstream;
 
 void WriteMatrix(long sizeOfMatrix, long double **writeMatrix, long double sumMainDiagonal, ofstream&writeFile) {
 
-    // Проверка на возможность открыть файл для чтения
+    // Проверка на возможность открыть файл для записи
     if (!writeFile.is_open()) {
         cout << "Error: Open file";
         return;
