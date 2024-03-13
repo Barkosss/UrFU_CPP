@@ -13,6 +13,11 @@ void fileSystem(std::ifstream&readFile, std::ofstream&writeFile) {
     // Чтение информации
     Train *trains = new Train[counterTrains];
     for(int indexTrain = 0; indexTrain < counterTrains; indexTrain++) {
+        /* ФОРМАТ ЗАПИСИ
+        1. Номер поезда
+        2. Пункт назначения
+        3. Время отправления (Timestamp, сколько секунд прошло с 1970 года 3 января, до момента отправки)
+        */
         readFile >> trains[indexTrain].numberTrain;
         readFile >> trains[indexTrain].destination;
         readFile >> trains[indexTrain].timestamp;
