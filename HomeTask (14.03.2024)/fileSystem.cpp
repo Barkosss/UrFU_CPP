@@ -51,10 +51,10 @@ void fileSystem(std::ifstream&readFile, std::ofstream&writeFile) {
 
 
     // Вывод информации
-    writeFile << "Train\t|\tStation\t| Timestamp                       |" << std::endl;
-    writeFile << "--------|-----------|---------------------------------|" << std::endl;
+    writeFile << "#Train\t|\tStation\t| Timestamp\t\t\t(Date)\t\t\t\t(Seconds)   |" << std::endl;
+    writeFile << "--------|-----------|---------------------------------------------------|" << std::endl;
     for(int indexTrain = 0; indexTrain < counterTrains; indexTrain++) {
-        writeFile << "#" << trains[indexTrain].numberTrain << "\t|\t" << trains[indexTrain].destination << "\t| Timestamp:\t" << ConvertTimestamp(trains[indexTrain].timestamp) << std::endl;
+        writeFile << "#" << trains[indexTrain].numberTrain << "\t|\t" << trains[indexTrain].destination << "\t| Timestamp:\t" << ConvertTimestamp(trains[indexTrain].timestamp) << "\t|\t" << trains[indexTrain].timestamp << "\t|" << std::endl;
     }
 
     std::cout << "Write end" << std::endl;
