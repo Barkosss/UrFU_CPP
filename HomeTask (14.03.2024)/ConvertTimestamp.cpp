@@ -101,7 +101,7 @@ string ConvertTimestamp(long long timestamp) {
 	minutes = (extraTime % 3600) / 60;
 	seconds = (extraTime % 3600) % 60;
     
-    resultTime = to_string(day) + "/" + to_string(month) + "/" + to_string(currentYear) + " " + to_string(hours) + ":" + to_string(minutes) + ":" + to_string(seconds);
+    resultTime = ((to_string(day).length() == 1) ? ("0") : ("")) +to_string(day) + "/" + ((to_string(month).length() == 1) ? ("0") : ("")) + to_string(month) + "/" + to_string(currentYear) + " " + ((to_string(hours).length() == 1) ? ("0") : ("")) +to_string(hours) + ":" + ((to_string(minutes).length() == 1) ? ("0") : ("")) + to_string(minutes) + "." + ((to_string(seconds).length() == 1) ? ("0") : ("")) + to_string(seconds);
 
 
     // Возращаем результат
