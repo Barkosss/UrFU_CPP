@@ -9,10 +9,12 @@ using std::string;
 
 List::Node::Node(string word): word(word), counter(0), nextItem(nullptr) {};
 
+// Проверка, пустой ли список
 bool List::is_empty() {
     return first == nullptr;
 }
 
+// Добавить элемент в список
 void List::push(string word) {
     Node* ptr = new Node(word);
     if (is_empty()) {
@@ -24,6 +26,7 @@ void List::push(string word) {
     last = ptr;
 };
 
+// Добавить +1 к счётчику
 void List::add(string word) {
     Node *ptr = first;
     while(ptr) {
@@ -34,17 +37,7 @@ void List::add(string word) {
     }
 };
 
-bool List::check(string word) {
-    Node *ptr = first;
-    while(ptr) {
-        if (ptr->word == word) {
-            return true;
-        }
-        ptr = ptr->nextItem;
-    }
-    return false;
-}
-
+// Сортировка
 void List::sort() {
     Node *ptrFirst = first;
     Node *ptrSecond;
@@ -54,6 +47,16 @@ void List::sort() {
 
     std::string tempWord;
     unsigned long tempCounter;
+    /* Сортировка
+    Сначала берём первый элемент из списка
+    Берём второй элемент из списка
+    Сравниваем первый и второй элементы,
+    если правый больше, чем левый, то меняем местами, иначе нет
+    Теперь, берём третий элемент и сравниваем с первым
+
+    Когда дошли до конца, то теперь сравниваем второй элемент с третьим, второй с четвёртым и так далее
+    Пока не дойдём до конца как с первой переменной (ptrFirst), так и со второй (ptrSecond)
+    */
     while(ptrFirst != nullptr) {
         ptrSecond = ptrFirst->nextItem;
         while(ptrSecond != nullptr) {
@@ -74,6 +77,7 @@ void List::sort() {
     }
 };
 
+// Вывести информацию в файл
 void List::print(std::ofstream&writeFile) {
     if (is_empty()) return;
     Node* ptr = first;
@@ -83,116 +87,3 @@ void List::print(std::ofstream&writeFile) {
     }
     writeFile << std::endl;
 };
-
-/*
-class List {
-private:
-    Node *first;
-    Node *last;
-
-    List(): first(nullptr) {};
-
-public:
-    bool is_empty() {
-        return first == nullptr;
-    }
-    
-    void push(string word) {
-        Node* p = new Node(word);
-        if (is_empty()) {
-            first = p;
-            last = p;
-            return;
-        }
-        last->nextItem = p;
-        last = p;
-    };
-
-    void add(string word) {
-        Node *ptr = first;
-        while(ptr) {
-            if (ptr->word == word) {
-                ptr->counter++;
-            }
-            ptr = ptr->nextItem;
-        }
-    }
-
-    bool check(string word) {
-        Node *ptr = first;
-        while(ptr) {
-            if (ptr->word == word) {
-                return true;
-            }
-            ptr = ptr->nextItem;
-        }
-        return false;
-    }
-
-    void sort() {
-        Node *ptrFirst = first;
-        Node *ptrSecond;
-
-        Node *temp;
-        while(ptrFirst->nextItem != nullptr) {
-            ptrSecond = ptrFirst->nextItem;
-            while(ptrSecond->nextItem != nullptr) {
-                if (ptrFirst->counter < ptrSecond->counter) {
-                    temp = ptrFirst;
-                    ptrFirst = ptrSecond;
-                    ptrSecond = temp;
-                }
-
-                ptrSecond = ptrSecond->nextItem;
-            }
-            ptrFirst = ptrFirst->nextItem;
-        }        
-    };
-
-    void print(std::ofstream&writeFile) {
-        if (is_empty()) return;
-        Node* ptr = first;
-        while (ptr) {
-            writeFile << ptr->word << ": " << ptr->counter << std::endl;
-            ptr = ptr->nextItem;
-        }
-        writeFile << std::endl;
-    };
-};
-*/
-
-/* Сортировка
-void partition(Node* head, Node* end, Node** newHead, Node** newEnd) {
-    Node* pivot = end;
-    Node* prev = NULL;
-
-    // Проходим по списку, сравнивая каждый элемент с pivot
-    while (pivot != NULL && pivot->next != NULL) {
-        if (pivot->data < pivot->next->data) {
-            prev = pivot;
-            pivot = pivot->next;
-        } else {
-            prev->next = pivot->next;
-            pivot->next = prev;
-            pivot = pivot->next;
-        }
-    }
-
-    // Если pivot является последним элементом, то ничего не делаем
-    if (pivot == end) {
-        return;
-    }
-
-    // Устанавливаем pivot в правильное положение
-    pivot->next = pivot->next->next;
-
-    // Находим конечный узел левой половины (список перед pivot)
-    Node* left = getTail(pivot->next);
-
-    // Повторяем для левого списка
-    partition(left, pivot->next, newHead, newEnd);
-
-    // Наконец, повторяем для правого списка
-    partition(pivot, end, newEnd, NULL);
-}
-*/
