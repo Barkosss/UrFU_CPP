@@ -17,7 +17,6 @@ private:
 public:
     List(): first(nullptr) {};
     bool is_empty();
-    bool check(std::string word);
     void push(std::string word);
     void add(std::string word);
     void sort();
