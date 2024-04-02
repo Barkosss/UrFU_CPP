@@ -2,15 +2,28 @@
 
 #include<string>
 
+using std::string;
+
+struct Word {
+    string word;
+    Word* next;
+    Word* prev;
+
+    Word(string word): word(word), next(nullptr), prev(nullptr) {};
+};
+
 class Sentence {
 private:
-    struct Words {
-        unsigned long counter;
-        std::string *words;
-    };
-    Sentence *next = nullptr;
-    Sentence *prev = nullptr;
+    Sentence* firstSentence;
+    Sentence* lastSentence;
+
+    unsigned long counterWords;
+    Sentence* next;
+    Sentence* prev;
 
 public:
-    void push(std::string sentence);
+    Sentence(): firstSentence(nullptr), lastSentence(nullptr), counterWords(0), next(nullptr), prev(nullptr) {};
+
+    void push(string *arrayWords, unsigned long counterWords);
+    bool is_empty();
 };
