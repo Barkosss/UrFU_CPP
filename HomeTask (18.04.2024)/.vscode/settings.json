@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "string": "cpp",
+        "istream": "cpp",
+        "xiosbase": "cpp",
+        "xstring": "cpp"
+    }
+}
