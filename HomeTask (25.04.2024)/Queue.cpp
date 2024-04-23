@@ -22,6 +22,7 @@ struct Stack {
     int intValue;
 
     Stack* nextStack;
+    Stack* prevStack;
 
     Stack(int value): intValue(value), nextStack(nullptr) {};
 };
@@ -47,12 +48,51 @@ public:
             oneStackLast = ptrStack;
         }
 
+        ptrStack->prevStack = oneStackLast;
         oneStackLast->nextStack = ptrStack;
         oneStackLast = ptrStack;
     }
 
-    void pop() {
-
+    int popStack(Stack* ptrStack) {
+        int value = ptrStack->intValue;
         
+        return value;
+    }
+
+    /*
+    def pop(self):
+        if not self.s2:
+            while self.s1:
+                self.s2.push(self.s1.pop())
+        return self.s2.pop()
+    */
+    int pop() {
+        if (!is_empty(twoStackFirst)) {
+            Stack *ptrStack = oneStackLast;
+            while(ptrStack) {
+                
+            }
+        }
+
+        return 0;
     }
 };
+
+/*
+class Queue:
+    def __init__(self):
+        self.s1 = Stack()
+        self.s2 = Stack()
+
+    def push(self, elem):
+        self.s1.push(elem)
+
+    def pop(self):
+        if not self.s2:
+            while self.s1:
+                self.s2.push(self.s1.pop())
+        return self.s2.pop()
+
+    def get_min(self):
+        return min(self.s1.get_min(), self.s2.get_min())
+*/
