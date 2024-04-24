@@ -2,14 +2,11 @@
 
 class Queue {
     // Пустой ли список
-    bool is_empty();
+    bool is_empty(Stack* stack);
 
     // Добавить число в стэк
-    void push(long long value);
+    void push(int value);
 
     // Удалить элемент из стэка
     void pop();
-
-    // Очистить стэк
-    void clear();
 };

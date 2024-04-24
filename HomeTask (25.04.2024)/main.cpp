@@ -122,11 +122,7 @@ void SystemMatrix(std::ifstream& readFile) {
 
 // Задание #2: Стэк
 void SystemQueue(std::ifstream& readFile) {
-    struct Stack {
-
-    };
-
-    
+    // ...    
 }
 
 
@@ -141,7 +137,6 @@ int main() {
     std::ifstream readFileStack("stack.barsik");
     SystemQueue(readFileStack);
     readFileStack.close();
-    
 
     return 0;
 }

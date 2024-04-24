@@ -18,6 +18,64 @@ Eсли стек s2 пустой:
 Как только s2 окажется снова пустым повторяем ту же операцию.
 */
 
+
+struct Stack {
+    int intValue;
+
+    Stack* nextStack;
+    Stack* prevStack;
+
+    Stack(int value): intValue(value) {};
+
+    int getValue() {
+        return intValue;
+    }
+
+    void push(int value) {
+        // ...
+    }
+
+    int pop() {
+        int output = intValue;
+
+        // ...
+
+        return output;
+    }
+};
+
+class Queue {
+private:
+    Stack* oneStackFirst;
+    Stack* oneStackLast;
+
+    Stack* twoStackFirst;
+    Stack* twoStackLast;
+
+public:
+    bool is_empty(Stack* stack) {
+        return stack == nullptr;
+    }
+
+    void push(int value) {
+        // ...
+    }
+
+    /*
+    def pop(self):
+        if not self.s2:
+            while self.s1:
+                self.s2.push(self.s1.pop())
+        return self.s2.pop()
+    */
+    int pop() {
+        // ...
+    }
+};
+
+
+
+/*
 struct Stack {
     int intValue;
 
@@ -66,6 +124,7 @@ public:
                 self.s2.push(self.s1.pop())
         return self.s2.pop()
     */
+   /*
     int pop() {
         if (!is_empty(twoStackFirst)) {
             Stack *ptrStack = oneStackLast;
@@ -78,7 +137,7 @@ public:
     }
 };
 
-/*
+
 class Queue:
     def __init__(self):
         self.s1 = Stack()
