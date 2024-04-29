@@ -19,30 +19,23 @@ Eсли стек s2 пустой:
 */
 
 
-struct Stack {
-    int intValue;
+Stack::Stack(int value): intValue(value) {};
 
-    Stack* nextStack;
-    Stack* prevStack;
+int Stack::getValue() {
+    return intValue;
+}
 
-    Stack(int value): intValue(value) {};
+void Stack::push(int value) {
+    // ...
+}
 
-    int getValue() {
-        return intValue;
-    }
+int Stack::pop() {
+    int output = intValue;
 
-    void push(int value) {
-        // ...
-    }
+    // ...
 
-    int pop() {
-        int output = intValue;
-
-        // ...
-
-        return output;
-    }
-};
+    return output;
+}
 
 class Queue {
 private:

@@ -1,10 +1,5 @@
 #include "polygon.h"
 
-Polygon::Polygon(){};
-
-Polygon::Polygon(unsigned long long counterPolygon) {
-
-};
 
 // Создать точки для полинома
 void Polygon::createPoints(unsigned long long counterPoints) {
@@ -17,7 +12,7 @@ void Polygon::setPoint(unsigned long long indexPoint, long double pointX, long d
     array[indexPoint].y = pointY;   
 };
 
-// Вычислить прлощадь
+// Вычислить площадь
 long double Polygon::ComputeSquare() {
     long double result = 0.0;
 

@@ -12,7 +12,7 @@ private:
     long double square;
 
 public:
-    Polygon();
+    Polygon() {};
     void createPoints(unsigned long long counterPoints);
     void setPoint(unsigned long long indexPoint, long double pointX, long double pointY);
     long double ComputeSquare();

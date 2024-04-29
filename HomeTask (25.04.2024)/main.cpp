@@ -7,116 +7,94 @@
 
 // Задание #1: Матрица
 void SystemMatrix(std::ifstream& readFile) {
-    unsigned long long counter;
-    readFile >> counter;
+    std::ofstream writeFile("output.barsik");
+    long long value; long double scalar;
+    unsigned long long counterOperation, counterElements, indexCollumn, indexRow;
+    char _char;
+    readFile >> counterOperation >> _char;
 
-    for(unsigned long indexOperation = 0; indexOperation < counter; indexOperation++) {
-        char operation;
-        readFile >> operation;
-
+    for(unsigned long long indexOperation = 0; indexOperation < counterOperation; indexOperation++) {
+        Matrix matrix;
+        
         // Сложение
-        if (operation == '+') {
-            unsigned long long length;
-            readFile >> length;
-            
-            // Первая матрица
-            Matrix oneMatrix = Matrix(length);
-            long long** arrayMatrix = new long long*[length];
-            for(unsigned index = 0; index < length; index++) {
-                arrayMatrix[index] = new long long[length];
-                for(unsigned jndex = 0; jndex < length; jndex++) {
-                    readFile >> arrayMatrix[index][jndex];
-                }
+        if (_char == '+') {
+            Matrix oneMatrix = Matrix();
+            readFile >> counterElements;
+
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                oneMatrix.push(value, indexCollumn, indexRow);
             }
-            oneMatrix.setArray(arrayMatrix);
 
-            // Вторая матрица
-            Matrix twoMatrix = Matrix(length);
-            for(unsigned index = 0; index < length; index++) {
-                for(unsigned jndex = 0; jndex < length; jndex++) {
-                    readFile >> arrayMatrix[index][jndex];
-                }
+            Matrix twoMatrix = Matrix();
+            readFile >> counterElements;
+
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                twoMatrix.push(value, indexCollumn, indexRow);
             }
-            twoMatrix.setArray(arrayMatrix);
 
-            Matrix resultMatrix = oneMatrix + twoMatrix;
-
-            std::cout << "Result sum: " << std::endl << resultMatrix << std::endl;
+            matrix = oneMatrix + twoMatrix;
         }
 
-        // Вычитание
-        else if (operation == '-') {
-            unsigned long long length;
-            readFile >> length;
+        // Разность
+        else if (_char == '-') {
+            Matrix oneMatrix = Matrix();
+            readFile >> counterElements;
 
-            // Первая матрица
-            Matrix oneMatrix = Matrix(length);
-            long long** arrayMatrix = new long long*[length];
-            for(unsigned index = 0; index < length; index++) {
-                arrayMatrix[index] = new long long[length];
-                for(unsigned jndex = 0; jndex < length; jndex++) {
-                    readFile >> arrayMatrix[index][jndex];
-                }
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                oneMatrix.push(value, indexCollumn, indexRow);
             }
-            oneMatrix.setArray(arrayMatrix);
 
-            // Вторая матрица
-            Matrix twoMatrix = Matrix(length);
-            for(unsigned index = 0; index < length; index++) {
-                for(unsigned jndex = 0; jndex < length; jndex++) {
-                    readFile >> arrayMatrix[index][jndex];
-                }
+            Matrix twoMatrix = Matrix();
+            readFile >> counterElements;
+
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                twoMatrix.push(value, indexCollumn, indexRow);
             }
-            twoMatrix.setArray(arrayMatrix);
 
-            Matrix resultMatrix = oneMatrix - twoMatrix;
-
-            std::cout << "Result sub: " << std::endl << resultMatrix << std::endl;
+            matrix = oneMatrix - twoMatrix;
         }
 
-        // Умножение на матрицу или на скаляр
-        else if (operation == '*') {
-            char what;
-            readFile >> what;
+        // Произведение на матрицу
+        else if (_char == '*') {
+            Matrix oneMatrix = Matrix();
+            readFile >> counterElements;
 
-            unsigned long long length;
-            readFile >> length;
-
-            // Первая матрица
-            Matrix oneMatrix = Matrix(length);
-            long long** arrayMatrix = new long long*[length];
-            for(unsigned index = 0; index < length; index++) {
-                arrayMatrix[index] = new long long[length];
-                for(unsigned jndex = 0; jndex < length; jndex++) {
-                    readFile >> arrayMatrix[index][jndex];
-                }
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                oneMatrix.push(value, indexCollumn, indexRow);
             }
-            oneMatrix.setArray(arrayMatrix);
 
-            // Если умножение на скаляр
-            if (what == 's') {
-                long long scalar;
-                readFile >> scalar;
+            Matrix twoMatrix = Matrix();
+            readFile >> counterElements;
 
-                Matrix resultMulti = oneMatrix * scalar;
-                std::cout << "Result multi by scalar: " << std::endl << resultMulti << std::endl;
-            } 
-            
-            // Если умножение на матрицу
-            else {
-                // Вторая матрица
-                Matrix twoMatrix = Matrix(length);
-                for(unsigned index = 0; index < length; index++) {
-                    for(unsigned jndex = 0; jndex < length; jndex++) {
-                        readFile >> arrayMatrix[index][jndex];
-                    }
-                }
-                twoMatrix.setArray(arrayMatrix);
-
-                Matrix resultMulti = oneMatrix * twoMatrix;
-                std::cout << "Result multi by matrix: " << std::endl << resultMulti << std::endl;
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                twoMatrix.push(value, indexCollumn, indexRow);
             }
+
+            matrix = oneMatrix * twoMatrix;
         }
+
+        // Произведение на скаляр
+        else if (_char == 's') {
+            Matrix oneMatrix = Matrix();
+            readFile >> counterElements;
+
+            for(unsigned long long indexElements = 0; indexElements < counterElements; indexElements++) {
+                readFile >> indexCollumn >> indexRow >> value;
+                oneMatrix.push(value, indexCollumn, indexRow);
+            }
+
+            readFile >> scalar;
+
+            matrix = oneMatrix * scalar;
+        }
+
+        matrix.print(writeFile);
     }
 }
 
