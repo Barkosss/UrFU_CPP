@@ -19,10 +19,9 @@ std::string getAge() {
     return "";
 }
 
-long long getPhoneNumber(int number) {
-    if (!number) return number;
+long long getPhoneNumber() {
 
-    return getPhoneNumber(number - 1);
+    return getPhoneNumber();
 }
 
 std::string getSchool() {
@@ -37,11 +36,6 @@ int main() {
     int number;
     std::cin >> number;
     std::cout << "Answer" << std::endl;
-    getLength();
-
-    getRandomNumber();
-    getPhoneNumber(number);
-    getAnswer();
-
+    
     return 0;
 }

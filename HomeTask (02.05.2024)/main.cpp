@@ -13,5 +13,6 @@ int main() {
     // Второе задание;
     //decrypto();
 
+    std::cout << "Exit program" << std::endl;
     return 0;
 }

@@ -1,2 +1,9 @@
-getLength()
-getRandomNumber()
+ getLength();
+ getRandomNumber();
+ getAnswer();
+ getAge();
+ getPhoneNumber();
+ getPhoneNumber();
+ getSchool();
+ getName();
+ main();
