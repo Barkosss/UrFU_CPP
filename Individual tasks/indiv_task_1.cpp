@@ -40,16 +40,20 @@ public:
             return;
         }
 
-        tailPoint->nextPoint = new Point(x, y);
-        tailPoint = tailPoint->nextPoint;
+        tailPoint.nextPoint = new Point(x, y);
+        tailPoint = tailPoint.nextPoint;
     }
 
-    Point operation[](unsigned index) {
+    Point* operator[](unsigned index) {
         unsigned i = 0;
-        Point point;
-        for(point = headNode; i < index; i++, point = point.nextPoint) {};
+        Point* point = headPoint;
+        while(i < index) {
+            i++;
+            point = point.nextPoint;
+        }
+
         return point;
-    }
+    };
 
     // Compare square of Polygon
     long double compareSquare(unsigned countPoints) {
@@ -72,7 +76,7 @@ public:
 };
 
 // Сортировка массива
-void sort(long double& arrSquares, unsigned countSquare) {
+void sort(long double* arrSquares, unsigned countSquare) {
     long double tempX, tempY;
     for(unsigned index = 0; index < countSquare; index++) {
         for(unsigned jndex = index + 1; index < countSquare; jndex++) {
@@ -91,7 +95,7 @@ void sort(long double& arrSquares, unsigned countSquare) {
 
 int main() {
     ifstream inFile("input.txt");
-    ifstream outFile("output.txt");
+    ofstream outFile("output.txt");
 
     if (!inFile.is_open()) {
         cout << "File is not open" << endl;
@@ -112,12 +116,11 @@ int main() {
             polygon.push(x, y);
         }
         arrSquares[indexPolygon] = polygon.compareSquare(countPoints);
-        delete polygon;
     }
 
     sort(arrSquares, countPolygons);
     for(unsigned index = 0; index < countPolygons; index++) {
-        outFile << "#" << index << ": " << arrSquares[index] << endl;
+        outFile << '#' << index << ": " << arrSquares[index] << endl;
     }
 
     return 0;
