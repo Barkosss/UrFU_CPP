@@ -59,11 +59,11 @@ void Polygon::SetCounterVertices(unsigned counterVertices) {
 // Проверить, выпуклый ли многоугольник
 bool Polygon::isConvex() {
     /*
-    D = (x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)
+D = (x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)
 
-    if D == 0 - точка на прямой
-    if D > 0 - точка справа от прямой
-    if D < 0 - точка слева от прямой
+if D == 0 - точка на прямой
+if D > 0 - точка справа от прямой
+if D < 0 - точка слева от прямой
     */
 
     long double D;

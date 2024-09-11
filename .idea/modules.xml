@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< Updated upstream
       <module fileurl="file://$PROJECT_DIR$/.idea/C++ (ЯТП).iml" filepath="$PROJECT_DIR$/.idea/C++ (ЯТП).iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/UrFU_CPP.iml" filepath="$PROJECT_DIR$/.idea/UrFU_CPP.iml" />
+>>>>>>> Stashed changes
     </modules>
   </component>
 </project>
