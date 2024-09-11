@@ -18,6 +18,17 @@
 их в новый файл, упорядочив по убыванию площади.
 */
 
+struct Node {
+    long double x;
+    long double y;
+
+    Node(long double x, long double y): x(x), y(y) {};
+};
+
+class Polygon {
+
+};
+
 int main() {
     // ------------ Чтение многочленов ------------
     std::ifstream readFile("input.barsik");
