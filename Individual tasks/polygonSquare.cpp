@@ -26,7 +26,9 @@ struct Node {
 };
 
 class Polygon {
+private:
 
+public:
 };
 
 int main() {
