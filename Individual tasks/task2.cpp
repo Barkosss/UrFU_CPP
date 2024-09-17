@@ -29,10 +29,13 @@ private:
     Node* tailNode;
 
 public:
+    unsigned countElements;
+    List(): countElements(0), headNode(nullptr), tailNode(nullptr) {};
     Node operator[](int index) {
         Node* ptr = headNode;
         while(index) {
             ptr = ptr->nextNode;
+            index--;
         }
         return *ptr;
     }
@@ -51,10 +54,12 @@ public:
         if (!headNode) {
             headNode = new Node(value);
             tailNode = headNode;
+            countElements++;
             return;
         }
 
         if (!inList(value)) {
+            countElements++;
             tailNode->nextNode = new Node(value);
             tailNode = tailNode->nextNode;
         } else {
@@ -82,15 +87,11 @@ int main() {
         list.push(value);
     };
 
-    for(unsigned indexNumber = 0; indexNumber < countNumber; indexNumber++) {
-        cout << '#' << indexNumber << " | " << list[indexNumber].value << ": " << list[indexNumber].counter << endl;
-    }
 
-    /*
     outFile << "Number: Counter" << endl;
-    for(unsigned indexNumber = 0; indexNumber < countNumber; indexNumber++) {
+    for(unsigned indexNumber = 0; indexNumber < list.countElements; indexNumber++) {
         outFile << list[indexNumber].value << ": " << list[indexNumber].counter << endl;
-    }*/
+    }
 
     cout << "Program is done!" << endl;
 
