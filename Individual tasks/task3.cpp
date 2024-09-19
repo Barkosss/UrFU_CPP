@@ -1,43 +1,50 @@
 #include<iostream>
 #include<fstream>
+#include<vector>
 
-using std::cin;
+/*
+Задано множество из n целых чисел.
+Сформировать и вывести все подмножества заданного множества.
+*/
+
 using std::cout;
 using std::endl;
 using std::ifstream;
 using std::ofstream;
-
-/*
-В файле заданы строки из 5-ти чисел:
-    - границы отрезка,
-    - точность,
-    - номер функции,
-    - номер метода.
-
-Номер функции = {1,2,3}, где
-    1. f(x)=2 - x;
-    2. f(x)=x^3;
-    3. f(x)=cos(x).
-
-Номер метода = {1,2,3}, где
-    1. средних прямоугольников;
-    2. трапеций;
-    3. Симпсона.
-
-На заданном отрезке с заданной точностью вычислить приближенно
-значение интеграла от заданной функции заданным методом.
-*/
-
+using std::vector;
 
 int main() {
     ifstream inFile("input.txt");
     ofstream outFile("output.txt");
-    unsigned indexFunction, indexMethod;
-    long double leftBorder, rightBorder, accuracy;
 
-    inFile >> leftBorder >> rightBorder >> accuracy >> indexFunction >> indexMethod;
+    long value;
+    vector<long> arr;
+    while(!inFile.eof()) {
+        inFile >> value;
+        arr.push_back(value);
+    }
 
+    vector<vector<long>> subArr;
+    unsigned long size = arr.size();
+    for(unsigned long index = 0; index < size; index++) {
+        vector<long> set;
+        for(unsigned long jndex = index; jndex < size; jndex++) {
+            set.push_back(arr[jndex]);
+            subArr.push_back(set);
+        }
+        set.clear();
+    }
 
+    unsigned long subArrSize = subArr.size(), setSize;
+    for(unsigned long index = 0; index < subArrSize; index++) {
+        setSize = subArr[index].size();
+        outFile << "#" << index << ": ";
+        for(unsigned jndex = 0; jndex < setSize; jndex++) {
+            outFile << subArr[index][jndex] << " ";
+        }
+        outFile << endl;
+    }
+    cout << "Program is done!" << endl;
 
     return 0;
 }

@@ -40,19 +40,18 @@ public:
             return;
         }
 
-        tailPoint.nextPoint = new Point(x, y);
-        tailPoint = tailPoint.nextPoint;
+        tailPoint->nextPoint = new Point(x, y);
+        tailPoint = tailPoint->nextPoint;
     }
 
-    Point* operator[](unsigned index) {
-        unsigned i = 0;
+    Point operator[](unsigned index) {
         Point* point = headPoint;
-        while(i < index) {
-            i++;
-            point = point.nextPoint;
+        while(index) {
+            index--;
+            point = point->nextPoint;
         }
 
-        return point;
+        return *point;
     };
 
     // Compare square of Polygon
@@ -60,16 +59,17 @@ public:
         long double square = 0;
 
         for(int i = 0; i < countPoints - 1; i++) {
-            square += this[i].x * this[i + 1].y;
+            square += (*this)[i].x * (*this)[i + 1].y;
         }
 
-        square += this[countPoints - 1].x * this[0].y;
+        square += (*this)[countPoints - 1].x * (*this)
+        [0].y;
 
         for(int i = 0; i < countPoints - 1; i++) {
-            square -= this[i + 1].x * this[i].y;
+            square -= (*this)[i + 1].x * (*this)[i].y;
         }
 
-        square -= this[0].x * this[countPoints - 1].y;
+        square -= (*this)[0].x * (*this)[countPoints - 1].y;
 
         return square / 2;
     }
@@ -77,17 +77,13 @@ public:
 
 // Сортировка массива
 void sort(long double* arrSquares, unsigned countSquare) {
-    long double tempX, tempY;
+    long double temp;
     for(unsigned index = 0; index < countSquare; index++) {
-        for(unsigned jndex = index + 1; index < countSquare; jndex++) {
+        for(unsigned jndex = index + 1; jndex < countSquare; jndex++) {
             if (arrSquares[index] > arrSquares[jndex]) {
-                tempX = arrSquares[index].x; tempY = arrSquares[jndex].y;
-
-                arrSquares[index].x = arrSquares[jndex].x;
-                arrSquares[index].y = arrSquares[jndex].y;
-
-                arrSquares[jndex].x = tempX;
-                arrSquares[jndex].y = tempY;
+                temp = arrSquares[index];
+                arrSquares[index] = arrSquares[jndex];
+                arrSquares[jndex] = temp;
             }
         }
     }

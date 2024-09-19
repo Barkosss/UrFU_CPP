@@ -9,6 +9,12 @@ using std::endl;
 using std::ifstream;
 using std::ofstream;
 
+/*
+В начале исходного файла задано n - число вершин графа и далее его
+матрица смежности. Поиском в ширину найти все компоненты
+связности графа.
+ */
+
 int main() {
     ifstream inFile("input.txt");
     ofstream outFile("output.txt");

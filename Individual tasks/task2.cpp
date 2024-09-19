@@ -20,17 +20,19 @@ struct Node {
     unsigned long counter;
 
     Node* nextNode;
-    Node(long value): value(value), counter(0) {};
+    Node(long value): value(value), counter(1), nextNode(nullptr) {};
 };
 
 class List {
 private:
     Node* headNode;
-    Node* tailNode;
+    Node* tailNode; 
 
 public:
     unsigned countElements;
+    
     List(): countElements(0), headNode(nullptr), tailNode(nullptr) {};
+
     Node operator[](int index) {
         Node* ptr = headNode;
         while(index) {
@@ -39,6 +41,7 @@ public:
         }
         return *ptr;
     }
+
     bool inList(long value) {
         for(Node* node = headNode; node; node = node->nextNode) {
             if (node->value == value) {
@@ -71,18 +74,16 @@ public:
             }
         }
     }
-
 };
 
 int main() {
     ifstream inFile("input.txt");
     ofstream outFile("output.txt");
 
-    unsigned countNumber; long value;
-    inFile >> countNumber;
+    long value;
 
     List list = List();
-    for(unsigned indexNumber = 0; indexNumber < countNumber; indexNumber++) {
+    while(!inFile.eof()) {
         inFile >> value;
         list.push(value);
     };
