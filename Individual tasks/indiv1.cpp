@@ -21,8 +21,8 @@ struct Point {
     long double y;
     Point* nextPoint;
 
-    Point(): x(0), y(0) {};
-    Point(long double x, long double y): x(x), y(y) {};
+    Point(): x(0), y(0), nextPoint(nullptr) {};
+    Point(long double x, long double y): x(x), y(y), nextPoint(nullptr) {};
 };
 
 // Class: Polygon
@@ -89,6 +89,12 @@ void sort(long double* arrSquares, unsigned countSquare) {
     }
 }
 
+/*
+ * First input counter polygons;
+ * Second input counter points
+ * Input N points
+ */
+
 int main() {
     ifstream inFile("input.txt");
     ofstream outFile("output.txt");
@@ -102,7 +108,7 @@ int main() {
     inFile >> countPolygons;
 
     long double x, y;
-    long double* arrSquares = new long double[countPolygons];
+    auto* arrSquares = new long double[countPolygons];
     for(unsigned indexPolygon = 0; indexPolygon < countPolygons; indexPolygon++) {
         Polygon polygon = Polygon();
         inFile >> countPoints;
@@ -119,5 +125,6 @@ int main() {
         outFile << '#' << index << ": " << arrSquares[index] << endl;
     }
 
+    delete[] arrSquares;
     return 0;
-};
+}

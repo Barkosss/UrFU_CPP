@@ -32,38 +32,44 @@ using std::ofstream;
 // Func: 2 - x;
 long double oneFunc(long double x) {
     return 2 - x;
-};
+}
 
 // Func: x^3;
 long double twoFunc(long double x) {
     return pow(x, 3);
-};
+}
 
 // Func: cos(x);
 long double threeFunc(long double x) {
     return cos(x);
-};
+}
 
 // Method: Middle box;
 long double oneMethod(long double x) {
     // ...
-};
+
+    return 0;
+}
 
 // Method: Trapezoids
 long double twoMethod(long double x) {
     // ...
-};
+
+    return 0;
+}
 
 // Method: Simpson
 long double threeMethod(long double x) {
     // ...
-};
+}
 
-long double getIntegral(long double leftBorder, long double rightBorder, long double accuracy, long double (*func)(int, long double), long double (*method)()) {
+long double getIntegral(long double leftBorder, long double rightBorder, long double accuracy, long double (*func)(long double), long double (*method)(long double)) {
     long double result;
 
+
+
     return result;
-};
+}
 
 
 int main() {
@@ -73,8 +79,8 @@ int main() {
     long double leftBorder, rightBorder, accuracy;
 
     inFile >> leftBorder >> rightBorder >> accuracy >> indexFunction >> indexMethod;
-    long double (*functions)(long double) = { oneFunc, twoFunc, threeFunc };
-    long double (*methods)(long double) = { oneMethod, twoMethod, threeMethod };
+    long double (*functions[3])(long double) { oneFunc, twoFunc, threeFunc };
+    long double (*methods[3])(long double) { oneMethod, twoMethod, threeMethod };
     long double result = getIntegral(leftBorder, rightBorder, accuracy, functions[indexFunction], methods[indexMethod]);
 
     outFile << "Result: " << result << endl;

@@ -39,11 +39,7 @@ private:
 
     bool isBalancedRec(Node* ptrNode) {
 
-        if (!headTree) {
-            return true;
-        }
-
-        if (!ptrNode) {
+        if (!headTree || !ptrNode) {
             return true;
         }
 
@@ -87,7 +83,8 @@ public:
 
                 // If the element is smaller than the current one, consider the left tree
             else if (ptr-value < ptr_temp) {
-                ptr_temp = ptr_temp->leftNode;
+                ptr_temp->leftNode = ptr_temp;
+                //ptr_temp = ptr_temp->leftNode;
             }
 
                 // If the element is smaller than the current one, consider the right tree
